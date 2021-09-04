@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 
 import os
 
+import ursina_doc
 
 load_dotenv()
 
@@ -70,7 +71,7 @@ async def inf_gen(ctx):
 async def exit_b(ctx):
     await ctx.send(f'``window.exit_button.enabled = False``')
 
-@client.command(name="fps-counter", description="How to hide the FPS counter ?",aliases=['fpscnt','exitb'])
+@client.command(name="fps-counter", description="How to hide the FPS counter ?",aliases=['fpscnt','fpscounter'])
 async def fps_cnt(ctx):
     await ctx.send(f'``window.fps_counter.enabled = False``')
 
@@ -106,6 +107,32 @@ async def mesh(ctx):
 async def gif(ctx):
     await ctx.send(f'To play a sound use `Audio()`')
 
+@client.command(name="channels", description="List all channels and their use cases",aliases=['channel','chan','chans'])
+async def chan(ctx):
+    await ctx.send(f'''- Here's a list of channels with there uses 
+1.	#help  –  For help.
+2.	#help_2 – For help, only use if #help is busy.
+3.	#devlopment – For development of ursina engine.
+4.	#show_off – To show off your games.
+5.	#github – To see the commits of ursina engine's github.
+6.	#tect – For stuff related to technology.
+7.	#general – For general stuff.
+''')
+
+@client.command(name="docs", description="List all channels and their use cases",aliases=['channel','chan','chans'])
+async def chan(ctx):
+    await ctx.send(f'''- Here's a list of channels with there uses 
+1.	#help  –  For help.
+2.	#help_2 – For help, only use if #help is busy.
+3.	#devlopment – For development of ursina engine.
+4.	#show_off – To show off your games.
+5.	#github – To see the commits of ursina engine's github.
+6.	#tect – For stuff related to technology.
+7.	#general – For general stuff.
+''')
+
+
+
 
 @client.event
 async def on_ready():
@@ -124,24 +151,6 @@ client.run(os.getenv("TOKEN"))
 
 
 """
-    if message.content.lower().startswith(('!audio', '!aud', '!music')):
-        await message.channel.send('''To play a sound use `Audio()`''')
-    if message.content.lower().startswith(('!rule', '!rules')):
-        await message.channel.send(RuLe)
-    if message.content.lower().startswith(('!py', '!python')):
-        await message.channel.send('''**Python** is a easy to learn and use programming languege. It is present in `Top 5 Programming Languages`.''')
-    if message.content.lower().startswith(('!chan','!chans','!channels','!channel')):
-        await message.channel.send('''- Here's a list of channels with there uses 
-1.	#help  –  For help.
-2.	#help_2 – For help, only use if #help is busy.
-3.	#devlopment – For development of ursina engine.
-4.	#show_off – To show off your games.
-5.	#github – To see the commits of ursina engine's github.
-6.	#tect – For stuff related to technology.
-7.	#general – For general stuff.
-''')
-
-
     if message.content.lower().startswith('!doc entity'):
         await message.channel.send(Entitydoc)
     if message.content.lower().startswith('!doc text'):
