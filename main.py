@@ -8,7 +8,7 @@ import os
 load_dotenv()
 
 
-client = commands.Bot(command_prefix="!")
+client = commands.Bot(case_insensitive=True, command_prefix="!")
 
 
 @client.remove_command('help')
@@ -38,7 +38,7 @@ async def api(ctx):
     await ctx.send(f'``This is the api refrence`` - https://www.ursinaengine.org/cheat_sheet.html')
 
 
-@client.command(name="ursina", description="Gives you info about what is Ursina", aliases=['info', 'Ursina'])
+@client.command(name="ursina", description="Gives you info about what is Ursina", aliases=['info'])
 async def ursina(ctx):
     await ctx.send(f'``Ursina`` makes it easier to develop games, visualizations and other kinds of software,with ``Python!``')
 
@@ -78,6 +78,33 @@ async def fps_cnt(ctx):
 async def xhair(ctx):
     await ctx.send(f'``change player.cursor to a different entity``')
 
+@client.command(name="textures", description="What file type can I use as textures",aliases=['texture','tex'])
+async def tex(ctx):
+    await ctx.send(f'``.tif, .jpg, .jpeg, .png, .gif, .mp4``')
+
+@client.command(name="model", description="What file type can I use as models",aliases=['models','mod'])
+async def mod(ctx):
+    await ctx.send(f'``.bam, .ursinamesh, .obj, .glb, .gltf, .blend``')
+
+@client.command(name="collision", description="How can I add collisions to my game with ursina ?",aliases=['collisions','col'])
+async def col(ctx):
+    await ctx.send(f'There you go : https://www.ursinaengine.org/collision.html')
+
+@client.command(name="build", description="How can I release my game with ursina ?",aliases=['release','rel'])
+async def release(ctx):
+    await ctx.send(f'``Follow this guide - https://www.ursinaengine.org/building.html``')
+
+@client.command(name="gif", description="How can I load a `.gif` file ?",aliases=['animation','animations'])
+async def gif(ctx):
+    await ctx.send(f'To load a `.gif` file use `Animation(‘gifName.gif’)`')
+
+@client.command(name="mesh", description="How to create a mesh ?")
+async def mesh(ctx):
+    await ctx.send(f'To make a mesh use `Mesh(vertices, triangles)`')
+
+@client.command(name="sound", description="How can I load a `.gif` file ?",aliases=['audio','music','aud'])
+async def gif(ctx):
+    await ctx.send(f'To play a sound use `Audio()`')
 
 
 @client.event
@@ -97,18 +124,6 @@ client.run(os.getenv("TOKEN"))
 
 
 """
-    if message.content.startswith(("!tex", "What files can I use as texture in ursina ?")):
-        await message.channel.send('``.tif, .jpg, .jpeg, .png, .gif, .mp4``')
-    if message.content.startswith(("!mod", "What files can I use as models in ursina ?")):
-        await message.channel.send('``.bam, .ursinamesh, .obj, .glb, .gltf, .blend``')
-    if message.content.startswith(("!col","!Col", "How can I add collisions to my game with ursina ?")):
-        await message.channel.send('``.bam, .ursinamesh, .obj, .glb, .gltf, .blend``')
-    if message.content.startswith(("!rel", "How can I release my game with ursina ?")):
-        await message.channel.send('``You can release your game here - https://www.ursinaengine.org/building.html``')
-    if message.content.lower().startswith(('!gif', '!animation', '!animations')):
-        await message.channel.send('To load a `.gif` file use `Animation(‘gifName.gif’)`')
-    if message.content.lower().startswith('!mesh'):
-        await message.channel.send('To make a mesh use `Mesh(vertices, triangles)`')
     if message.content.lower().startswith(('!audio', '!aud', '!music')):
         await message.channel.send('''To play a sound use `Audio()`''')
     if message.content.lower().startswith(('!rule', '!rules')):
