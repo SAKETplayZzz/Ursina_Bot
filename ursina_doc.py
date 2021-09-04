@@ -1,29 +1,4 @@
-"""commands = ('''@Ursina-Bot commands 
-1.`` !github `` or ``!gh``
-2.`` !api ``
-3.`` !info ``
-4.`` !msg `` this tells how to message code in discord
-5.`` !mcclone `` gives the link to minecraft clone in github
-6.`` !shaders `` tells all the shaders available in ursina
-7.`` !entity `` 
-8.`` !proced `` gives a short explaination abt how to use procedual gen to achive infinite generation in an minecraft clone
-9.``!exitb`` tells hoe to remove exit button
-10.``!fps`` tells how to remove fps button
-11.``!xhair`` tells how to remove cross hair the cmd is xhair because x is like a cross so xhair
-12.``!tex`` tells all the texture formats u can use
-13.``!mod`` tells all the model formats which can be used
-14.``!col`` tells all the formats of colliders which can be loaded
-15.``!rel`` tells how u can release ur ursina game
-16.``!cmd`` or ``!cmds`` or``!commands``
-17.``!doc Entity``
-18.``!doc Entity``
-19.``!doc Button``
-20.``!doc Text``
-21.``!doc Mouse``
-22.``!doc Raycast``
-*commands 9 to 15 have automated answers if written in the correct way example-*``What files can I use as models in ursina ?``
-`` this bot is online 24/7 ``''')
-Entitydoc = ('''``Entity(add_to_scene_entities=True, **kwargs)``
+doc = {"entity" :'''``Entity(add_to_scene_entities=True, **kwargs)``
 ``name = camel_to_snake(self.type) ``
 ``enabled = True    # disabled entities will not be visible nor run code. ``
 ``visible = True ``
@@ -52,9 +27,9 @@ class Player(Entity):
         self.x += held_keys['d'] * time.dt * 10
         self.x -= held_keys['a'] * time.dt * 10
 
-player = Player(x=-1)```''')
+player = Player(x=-1)```''',
 
-textdoc = ('''`` Text(text='', start_tag=start_tag, end_tag=end_tag, ignore=True, **kwargs)
+"text" :'''`` Text(text='', start_tag=start_tag, end_tag=end_tag, ignore=True, **kwargs)
 
 size = Text.size 
 parent = camera.ui 
@@ -83,8 +58,8 @@ origin = (-.5, .5)``
   window.fps_counter.enabled = False
   print('....', Text.get_width('yolo'))
   app.run()```
-''')
-buttondoc = ('''
+''',
+"button" :'''
 ``Button(text='', **kwargs)``
 
 ``parent = camera.ui`` 
@@ -98,8 +73,8 @@ Example -
 b = Button(text='hello world!', color=color.azure, icon='sword', scale=.25, text_origin=(-.5,0))
 b.on_click = application.quit # assign a function to the button.
 b.tooltip = Tooltip('exit')
-```''')
-mousedoc = ('''
+```''',
+"mouse" :'''
 ``enabled = False ``
 ``visible = True ``
 ``locked = False ``
@@ -112,8 +87,8 @@ def update():
     print(mouse.position, mouse.point)
 
 Cursor()
-mouse.visible = False```''')
-raycastdoc = ('''
+mouse.visible = False```''',
+"raycast" : '''
 ``distance(a, b)``   
 ``raycast(origin, direction=(0,0,1), distance=inf, traverse_target=scene, ignore=list(), debug=False) ``  
 ``boxcast(origin, direction=(0,0,1), distance=9999, thickness=(1,1), traverse_target=scene, ignore=list(), debug=False)   # similar to raycast, but with width and height``
@@ -148,5 +123,5 @@ wall_left = Entity(model='cube', collider='box', scale_y=3, origin_y=-.5, color=
 wall_right = duplicate(wall_left, x=4)
 camera.y = 2
 ```
-''')
-"""
+'''
+}

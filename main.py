@@ -119,17 +119,16 @@ async def chan(ctx):
 7.	#general – For general stuff.
 ''')
 
-@client.command(name="docs", description="List all channels and their use cases",aliases=['channel','chan','chans'])
-async def chan(ctx):
-    await ctx.send(f'''- Here's a list of channels with there uses 
-1.	#help  –  For help.
-2.	#help_2 – For help, only use if #help is busy.
-3.	#devlopment – For development of ursina engine.
-4.	#show_off – To show off your games.
-5.	#github – To see the commits of ursina engine's github.
-6.	#tect – For stuff related to technology.
-7.	#general – For general stuff.
-''')
+@client.command(name="doc", description="Refer you to the ursina documentation",aliases=['documentation','docs'])
+async def doc(ctx,snippet=""):
+    snippet=snippet.lower()
+    if snippet :
+        if snippet in ursina_doc.doc.keys():
+            await ctx.send(ursina_doc.doc[snippet])
+        else :
+            await ctx.send("Snippet not found")
+    else :
+        await ctx.send(f'``This is the api refrence`` - https://www.ursinaengine.org/cheat_sheet.html')
 
 
 
