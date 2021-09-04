@@ -1,0 +1,9 @@
+__pycache__/
+venv/
+test_data/
+
+# IDE
+.vscode/
+
+# replit
+.breakpoints
