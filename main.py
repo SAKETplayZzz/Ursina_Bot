@@ -149,15 +149,3 @@ async def on_message(message):
 client.run(os.getenv("TOKEN"))
 
 
-"""
-    if message.content.lower().startswith('!doc entity'):
-        await message.channel.send(Entitydoc)
-    if message.content.lower().startswith('!doc text'):
-        await message.channel.send(textdoc)
-    if message.content.lower().startswith('!doc button'):
-        await message.channel.send(buttondoc)
-    if message.content.lower().startswith('!doc mouse'):
-        await message.channel.send(mousedoc)
-    if message.content.lower().startswith('!doc raycast'):
-        await message.channel.send(raycastdoc)
-"""
