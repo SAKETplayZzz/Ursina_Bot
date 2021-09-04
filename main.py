@@ -1,142 +1,115 @@
 import discord
 from discord.ext import commands
-################
-def wake_up_the_bot():
-  from flask import Flask
-  from threading import Thread
-  app = Flask('')
-  @app.route('/')
-  def home():
-      return """<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0?autoplay=1" title="Never gonna give you up" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
-  def run():
-    app.run(host='0.0.0.0',port=8080)
-  t = Thread(target=run)
-  t.start()
-wake_up_the_bot()
-client = discord.Client()
+from dotenv import load_dotenv
+
+import os
+
+import ursina_doc
+
+load_dotenv()
 
 
-@client.event
-async def on_ready():
-  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='NOTHING'))
-  print('connected {0.user}'.format(client))
+client = commands.Bot(case_insensitive=True, command_prefix="!")
 
-from text import *
-'''We're no strangers to love
-You know the rules and so do I
-A full commitment's what I'm thinking of
-You wouldn't get this from any other guy
-I just wanna tell you how I'm feeling
-Gotta make you understand
-Never gonna give you up
-Never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry
-Never gonna say goodbye
-Never gonna tell a lie and hurt you
-We've known each other for so long
-Your heart's been aching but you're too shy to say it
-Inside we both know what's been going on
-We know the game and we're gonna play it
-And if you ask me how I'm feeling
-Don't tell me you're too blind to see
-Never gonna give you up
-Never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry
-Never gonna say goodbye
-Never gonna tell a lie and hurt you
-Never gonna give you up
-Never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry
-Never gonna say goodbye
-Never gonna tell a lie and hurt you
-Never gonna give, never gonna give
-(Give you up)
-We've known each other for so long
-Your heart's been aching but you're too shy to say it
-Inside we both know what's been going on
-We know the game and we're gonna play it
-I just wanna tell you how I'm feeling
-Gotta make you understand
-Never gonna give you up
-Never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry
-Never gonna say goodbye
-Never gonna tell a lie and hurt you
-Never gonna give you up
-Never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry
-Never gonna say goodbye
-Never gonna tell a lie and hurt you
-Never gonna give you up
-Never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry
-Never gonna say goodbye'''
-@client.event
-async def on_message(message):
-  if message.author != client.user:# problem !rule command dosent work u forgot to add the rules
-    if message.content.lower().startswith('!doc entity'):
-      await message.channel.send(Entitydoc)
-    if message.content.lower().startswith('!doc text'):
-      await message.channel.send(textdoc)
-    if message.content.lower().startswith('!doc button'):
-      await message.channel.send(buttondoc)
-    if message.content.lower().startswith('!doc mouse'):
-      await message.channel.send(mousedoc)
-    if message.content.lower().startswith('!doc raycast'):
-      await message.channel.send(raycastdoc)
-    if message.content.startswith(('!commands', '!cmds', '!cmd', '!help')):
-      await message.channel.send(commands)
-    if message.content.startswith(('!github', '!gh')):
-      await message.channel.send('``This is the github`` https://github.com/pokepetter/ursina')
-    if message.content.startswith('!api'):
-      await message.channel.send('``This is the api refrence`` - https://www.ursinaengine.org/cheat_sheet.html')
-    if message.content.startswith(('!info', '!ursina', '!Ursina')):
-      await message.channel.send('``Ursina`` makes it easier to develop games, visualizations and other kinds of software,with ``Python!``')
-    if message.content.startswith('!msg'):
-      await message.channel.send('``This how you post your code``'
-                             'https://discord.com/channels/593486730187899041/593501819213316185/815179461711757321')
-    if message.content.startswith('!mcclone'):
-      await message.channel.send('``Refer this`` - https://github.com/pokepetter/ursina/blob/master/samples/minecraft_clone.py')
-    if message.content.startswith(("!shaders", "!shader")):
-      await message.channel.send('``Check this out for the type of shaders and an example`` - https://www.ursinaengine.org/cheat_sheet.html#shaders')
-    if message.content.startswith("!entity"):
-      await message.channel.send('``Check this out for understanding entitys`` - https://www.ursinaengine.org/cheat_sheet.html#Entity')
-    if message.content.startswith("!mcinfgen"):
-      await message.channel.send('*Procedural generation* can be achieved by using the mesh class wisely or by *creating multiple entities around the player in a chunked manner.*')
-    if message.content.startswith("@helper"):
-      await message.channel.send('``Please be patient ``')
-    if message.content.startswith(("!exitb", "How to remove exit button ?")):
-      await message.channel.send('``window.exit_button.enabled = False``')
-    if message.content.startswith(("!fpscnt", "How to hide the FPS counter ?")):
-      await message.channel.send('``window.fps_counter.enabled = False``')
-    if message.content.startswith(("!xhair", "How to hide the change the FirstPersonController crosshair ?")):
-      await message.channel.send('``change player.cursor to a different entity``')
-    if message.content.startswith(("!tex", "What files can I use as texture in ursina ?")):
-      await message.channel.send('``.tif, .jpg, .jpeg, .png, .gif, .mp4``')
-    if message.content.startswith(("!mod", "What files can I use as models in ursina ?")):
-      await message.channel.send('``.bam, .ursinamesh, .obj, .glb, .gltf, .blend``')
-    if message.content.startswith(("!col","!Col", "How can I add collisions to my game with ursina ?")):
-      await message.channel.send('``.bam, .ursinamesh, .obj, .glb, .gltf, .blend``')
-    if message.content.startswith(("!rel", "How can I release my game with ursina ?")):
-      await message.channel.send('``You can release your game here - https://www.ursinaengine.org/building.html``')
-    if message.content.lower().startswith(('!gif', '!animation', '!animations')):
-      await message.channel.send('To load a `.gif` file use `Animation(‘gifName.gif’)`')
-    if message.content.lower().startswith('!mesh'):
-      await message.channel.send('To make a mesh use `Mesh(vertices, triangles)`')
-    if message.content.lower().startswith(('!audio', '!aud', '!music')):
-      await message.channel.send('''To play a sound use `Audio()`''')
-    if message.content.lower().startswith(('!rule', '!rules')):
-      await message.channel.send(RuLe)
-    if message.content.lower().startswith(('!py', '!python')):
-      await message.channel.send('''**Python** is a easy to learn and use programming languege. It is present in `Top 5 Programming Languages`.''')
-    if message.content.lower().startswith(('!chan','!chans','!channels','!channel')):
-      await message.channel.send('''- Here's a list of channels with there uses 
+
+@client.remove_command('help')
+@client.command(name="help", description="Show this menu", aliases=['cmd', 'cmds', 'commands'])
+async def get_help(ctx, commandename=""):
+    """
+    show a list of all the commands the bot has
+    """
+    to_send = """\n> \n> **Commands List** : \n"""
+    to_send += "> \n"
+    for commande in client.commands:
+        to_send += "> \n"
+        to_send += f"""> `!{commande.name}` : {commande.description}\n"""
+
+    to_send += "> \n"
+    to_send += f"""> _Bot created for the **Ursina** discord server_ \n"""
+    await ctx.send(content=to_send)
+
+
+@client.command(name="github", description="Show the link to the official ursina github", aliases=['gh', 'git'])
+async def github(ctx):
+    await ctx.send(f'``This is the github`` https://github.com/pokepetter/ursina')
+
+
+@client.command(name="api", description="Link you to the Api reference")
+async def api(ctx):
+    await ctx.send(f'``This is the api refrence`` - https://www.ursinaengine.org/cheat_sheet.html')
+
+
+@client.command(name="ursina", description="Gives you info about what is Ursina", aliases=['info'])
+async def ursina(ctx):
+    await ctx.send(f'``Ursina`` makes it easier to develop games, visualizations and other kinds of software,with ``Python!``')
+
+
+@client.command(name="msg", description="Show you how an help on how to post code")
+async def msg(ctx):
+    await ctx.send(f'``This how you post your code``'
+                     'https://discord.com/channels/593486730187899041/593501819213316185/815179461711757321')
+
+
+@client.command(name="mcclone", description="How to make a minecraft clone", aliases=['minecraft-clone', 'minecraft'])
+async def mcclone(ctx):
+    await ctx.send(f'``Refer this`` - https://github.com/pokepetter/ursina/blob/master/samples/minecraft_clone.py')
+
+
+@client.command(name="shaders", description="Quick information about what are shaders and how use them", aliases=['shader'])
+async def shaders(ctx):
+    await ctx.send(f'``Check this out for the type of shaders and an example`` - https://www.ursinaengine.org/cheat_sheet.html#shaders')
+
+@client.command(name="entity", description="Show you how an help on how to post code")
+async def entity(ctx):
+    await ctx.send(f'``Check this out for understanding entitys`` - https://www.ursinaengine.org/cheat_sheet.html#Entity')
+
+@client.command(name="mcinfgen", description="Show you how an help on how to post code")
+async def inf_gen(ctx):
+    await ctx.send(f'*Procedural generation* can be achieved by using the mesh class wisely or by *creating multiple entities around the player in a chunked manner.*')
+
+@client.command(name="exit-button", description="How to remove exit button",aliases=['exitbutton','exitb'])
+async def exit_b(ctx):
+    await ctx.send(f'``window.exit_button.enabled = False``')
+
+@client.command(name="fps-counter", description="How to hide the FPS counter ?",aliases=['fpscnt','fpscounter'])
+async def fps_cnt(ctx):
+    await ctx.send(f'``window.fps_counter.enabled = False``')
+
+@client.command(name="crosshair", description="How to hide the change the FirstPersonController crosshair ?",aliases=['xhair','cross-hair'])
+async def xhair(ctx):
+    await ctx.send(f'``change player.cursor to a different entity``')
+
+@client.command(name="textures", description="What file type can I use as textures",aliases=['texture','tex'])
+async def tex(ctx):
+    await ctx.send(f'``.tif, .jpg, .jpeg, .png, .gif, .mp4``')
+
+@client.command(name="model", description="What file type can I use as models",aliases=['models','mod'])
+async def mod(ctx):
+    await ctx.send(f'``.bam, .ursinamesh, .obj, .glb, .gltf, .blend``')
+
+@client.command(name="collision", description="How can I add collisions to my game with ursina ?",aliases=['collisions','col'])
+async def col(ctx):
+    await ctx.send(f'There you go : https://www.ursinaengine.org/collision.html')
+
+@client.command(name="build", description="How can I release my game with ursina ?",aliases=['release','rel'])
+async def release(ctx):
+    await ctx.send(f'``Follow this guide - https://www.ursinaengine.org/building.html``')
+
+@client.command(name="gif", description="How can I load a `.gif` file ?",aliases=['animation','animations'])
+async def gif(ctx):
+    await ctx.send(f'To load a `.gif` file use `Animation(‘gifName.gif’)`')
+
+@client.command(name="mesh", description="How to create a mesh ?")
+async def mesh(ctx):
+    await ctx.send(f'To make a mesh use `Mesh(vertices, triangles)`')
+
+@client.command(name="sound", description="How can I load a `.gif` file ?",aliases=['audio','music','aud'])
+async def gif(ctx):
+    await ctx.send(f'To play a sound use `Audio()`')
+
+@client.command(name="channels", description="List all channels and their use cases",aliases=['channel','chan','chans'])
+async def chan(ctx):
+    await ctx.send(f'''- Here's a list of channels with there uses 
 1.	#help  –  For help.
 2.	#help_2 – For help, only use if #help is busy.
 3.	#devlopment – For development of ursina engine.
@@ -145,12 +118,34 @@ async def on_message(message):
 6.	#tect – For stuff related to technology.
 7.	#general – For general stuff.
 ''')
+
+@client.command(name="doc", description="Refer you to the ursina documentation",aliases=['documentation','docs'])
+async def doc(ctx,snippet=""):
+    snippet=snippet.lower()
+    if snippet :
+        if snippet in ursina_doc.doc.keys():
+            await ctx.send(ursina_doc.doc[snippet])
+        else :
+            await ctx.send("Snippet not found")
+    else :
+        await ctx.send(f'``This is the api refrence`` - https://www.ursinaengine.org/cheat_sheet.html')
+
+
+
+
+@client.event
+async def on_ready():
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="!help"))
+    print(f'{client.user.name} has connected to Discord!')
+
+
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
     await client.process_commands(message)
 
-import os
 client.run(os.getenv("TOKEN"))
-'''New command Add on opt
 
-    if message.content.lower().startswith(('', '')):
-      await message.channel.send(''' ''')
-'''
+
