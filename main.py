@@ -148,7 +148,7 @@ async def on_message(message):
     await client.process_commands(message)
 
 import os
-client.run(os.getenv("TOKEN2"))
+client.run(os.getenv("TOKEN"))
 '''New command Add on opt
 
     if message.content.lower().startswith(('', '')):
