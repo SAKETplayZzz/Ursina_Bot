@@ -13,10 +13,8 @@ def wake_up_the_bot():
   t = Thread(target=run)
   t.start()
 wake_up_the_bot()
-
-intents = discord.Intents().default()
 client = discord.Client()
-client = commands.Bot(command_prefix = '!', intents=intents)
+
 
 @client.event
 async def on_ready():
