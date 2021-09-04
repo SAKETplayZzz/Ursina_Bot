@@ -1,4 +1,4 @@
-commands = ('''@Ursina-Bot commands 
+"""commands = ('''@Ursina-Bot commands 
 1.`` !github `` or ``!gh``
 2.`` !api ``
 3.`` !info ``
@@ -149,6 +149,4 @@ wall_right = duplicate(wall_left, x=4)
 camera.y = 2
 ```
 ''')
-
-RuLe = """Watch this video:
-<https://www.youtube.com/watch?v=VrskJbygL7k>"""
+"""

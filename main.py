@@ -1,84 +1,64 @@
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
 
-def wake_up_the_bot():
-  from flask import Flask
-  from threading import Thread
-  app = Flask('')
-  @app.route('/')
-  def home():
-      return """<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0?autoplay=1" title="Never gonna give you up" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>"""
-  def run():
-    app.run(host='0.0.0.0',port=8080)
-  t = Thread(target=run)
-  t.start()
-wake_up_the_bot()
-client = discord.Client()
+import os
+
+
+load_dotenv()
+
+
+client = commands.Bot(command_prefix="!")
+
+@client.remove_command('help')
+
+@client.command(name="help", description="Show this menu")
+async def get_help(ctx,commandename = ""):
+    """
+    show a list of all the commands the bot has
+    """
+    if commandename :
+        message = ctx.message
+        commande = client.get_command(commandename)
+        if commande :
+            to_send = f">>> \nAide pour la commande : **={commande.name}**\n\n:information_source: Informations :\n{commande.description}\n\n:pencil2:  Syntaxe :\n`{syntaxe[commande.name]}`"
+            sent = await message.author.send(to_send)
+            await message.delete()
+        else :
+            sent = await ctx.send("Cette commande n'existe pas =")
+            await message.delete()
+
+    else :
+      to_send = """\n> \n> **Commands List** : \n"""
+      to_send += "> \n"
+      for commande in client.commands:
+          to_send += "> \n"
+          to_send += f"""> `!{commande.name}` {commande.description}\n"""
+
+      to_send += ">."
+      await ctx.send(content=to_send)
 
 
 @client.event
 async def on_ready():
-  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name='NOTHING'))
-  print('connected {0.user}'.format(client))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="!help"))
+    print(f'{client.user.name} has connected to Discord!')
 
-from text import *
-'''We're no strangers to love
-You know the rules and so do I
-A full commitment's what I'm thinking of
-You wouldn't get this from any other guy
-I just wanna tell you how I'm feeling
-Gotta make you understand
-Never gonna give you up
-Never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry
-Never gonna say goodbye
-Never gonna tell a lie and hurt you
-We've known each other for so long
-Your heart's been aching but you're too shy to say it
-Inside we both know what's been going on
-We know the game and we're gonna play it
-And if you ask me how I'm feeling
-Don't tell me you're too blind to see
-Never gonna give you up
-Never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry
-Never gonna say goodbye
-Never gonna tell a lie and hurt you
-Never gonna give you up
-Never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry
-Never gonna say goodbye
-Never gonna tell a lie and hurt you
-Never gonna give, never gonna give
-(Give you up)
-We've known each other for so long
-Your heart's been aching but you're too shy to say it
-Inside we both know what's been going on
-We know the game and we're gonna play it
-I just wanna tell you how I'm feeling
-Gotta make you understand
-Never gonna give you up
-Never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry
-Never gonna say goodbye
-Never gonna tell a lie and hurt you
-Never gonna give you up
-Never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry
-Never gonna say goodbye
-Never gonna tell a lie and hurt you
-Never gonna give you up
-Never gonna let you down
-Never gonna run around and desert you
-Never gonna make you cry
-Never gonna say goodbye'''
+
 @client.event
 async def on_message(message):
+    if message.author == client.user:
+        return
+        
+    await client.process_commands(message)
+
+client.run(os.getenv("TOKEN"))
+
+@client.command(name="github", description="Nombre de guilde dans lesquels est le bot",aliases=['gh','git'])
+async def guild_count(ctx):
+    await ctx.send(f'``This is the github`` https://github.com/pokepetter/ursina')
+
+"""
   if message.author != client.user:# problem !rule command dosent work u forgot to add the rules
     if message.content.lower().startswith('!doc entity'):
       await message.channel.send(Entitydoc)
@@ -147,10 +127,9 @@ async def on_message(message):
 ''')
     await client.process_commands(message)
 
-import os
-client.run(os.getenv("TOKEN"))
 '''New command Add on opt
 
     if message.content.lower().startswith(('', '')):
       await message.channel.send(''' ''')
 '''
+"""
