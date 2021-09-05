@@ -2,6 +2,7 @@ import discord
 import os
 from discord.ext import commands
 from dotenv import load_dotenv
+from math import ceil
 
 
 import ursina_doc
@@ -139,22 +140,38 @@ async def doc(ctx, snippet=""):
 
 
 def get_cheatsheet_embed(entry: dict) -> discord.Embed:
+    zws = "\u200b" # zero width space
+    description = entry.get("example") or ""
+    label = entry.get("label")
+    params = entry.get("params")
+    if params:
+        description = f"```py\n{params}```\nExample:\n```py\n{description}```"
+
     embed = discord.Embed(
-        title=entry.get("label"),
-        url=entry.get("github_url"),
-        description=entry.get("example"),
-        params=entry.get("params"),
-        color=0xf3e6a5,
+        title=label,
+        description= description,
+        color=0xf3e6a5
     )
-    embed.set_thumbnail(
-        url="https://cdn.discordapp.com/icons/593486730187899041/35fca63aa75c42253248c864c92124eb.png")
     methods = entry.get("methods")
     if methods:
-        embed.add_field(name="methods :", value=" ", inline=False)
-        for m in methods:
-            embed.add_field(name=" ", value=m, inline=True)
-    embed.set_footer(
-        text=entry.get("github_url"))
+        methods_string = ""
+        row_count = ceil(len(methods)/2.0)
+        for m in methods[:row_count]:
+            methods_string += f"`{m}`\n"
+        embed.add_field(name="Methods:", value=methods_string, inline=True)
+        if row_count > 1:
+            methods_string = ""
+            for m in methods[row_count:]:
+                methods_string += f"`{m}`\n"
+            embed.add_field(name=zws, value=methods_string, inline=True)
+
+    source_url = entry.get("github_url")
+    cheatsheet_url = "https://www.ursinaengine.org/cheat_sheet_dark.html#" + \
+        label.split("(")[0]
+    embed.add_field(
+        name="More information:",
+        value=f"[Source code]({source_url} '{source_url}') – [Cheat sheet]({cheatsheet_url} '{cheatsheet_url}')",
+        inline=False)
     return embed
 
 
@@ -173,5 +190,3 @@ async def on_message(message):
     await client.process_commands(message)
 
 client.run(os.getenv("TOKEN"))
-
-
