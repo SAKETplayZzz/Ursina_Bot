@@ -1,13 +1,16 @@
 import discord
+import os
 from discord.ext import commands
 from dotenv import load_dotenv
 
-import os
 
 import ursina_doc
+from docs import CheatSheet
 
 load_dotenv()
 
+
+cheatsheet = CheatSheet(local_html="test_data/ursina_cheat_sheet.html")
 
 client = commands.Bot(case_insensitive=True, command_prefix="!")
 
@@ -123,8 +126,8 @@ async def chan(ctx):
 async def doc(ctx,snippet=""):
     snippet=snippet.lower()
     if snippet :
-        if snippet in ursina_doc.doc.keys():
-            await ctx.send(ursina_doc.doc[snippet])
+        if snippet in cheatsheet.get_keys():
+            await ctx.send(cheatsheet.get_doc(snippet))
         else :
             await ctx.send("Snippet not found")
     else :
