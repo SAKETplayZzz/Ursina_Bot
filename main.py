@@ -9,10 +9,12 @@ from docs import CheatSheet
 
 load_dotenv()
 
+BOT_PREFIX = "." if os.getenv("DEBUG") else "!"
+
 
 cheatsheet = CheatSheet(local_html="test_data/ursina_cheat_sheet.html")
 
-client = commands.Bot(case_insensitive=True, command_prefix="!")
+client = commands.Bot(case_insensitive=True, command_prefix=BOT_PREFIX)
 
 
 @client.remove_command('help')
@@ -153,12 +155,13 @@ def get_cheatsheet_embed(entry: dict) -> discord.Embed:
             embed.add_field(name=" ", value=m, inline=True)
     embed.set_footer(
         text=entry.get("github_url"))
+    return embed
 
 
 
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="!help"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{BOT_PREFIX}help"))
     print(f'{client.user.name} has connected to Discord!')
 
 
