@@ -2,8 +2,10 @@ __pycache__/
 venv/
 test_data/
 
+.env
 # IDE
 .vscode/
 
 # replit
 .breakpoints
+poetry.lock
