@@ -122,17 +122,37 @@ async def chan(ctx):
 7.	#general – For general stuff.
 ''')
 
-@client.command(name="doc", description="Refer you to the ursina documentation",aliases=['documentation','docs'])
-async def doc(ctx,snippet=""):
-    snippet=snippet.lower()
-    if snippet :
-        if snippet in cheatsheet.get_keys():
-            await ctx.send(cheatsheet.get_doc(snippet))
-        else :
+
+@client.command(name="doc", description="Refer you to the ursina documentation", aliases=['documentation', 'docs'])
+async def doc(ctx, snippet=""):
+    snippet = snippet.lower()
+    if snippet:
+        entry = cheatsheet.get_doc(snippet)
+        if entry:
+            await ctx.send(embed=get_cheatsheet_embed(entry))
+        else:
             await ctx.send("Snippet not found")
-    else :
+    else:
         await ctx.send(f'``This is the api refrence`` - https://www.ursinaengine.org/cheat_sheet.html')
 
+
+def get_cheatsheet_embed(entry: dict) -> discord.Embed:
+    embed = discord.Embed(
+        title=entry.get("label"),
+        url=entry.get("github_url"),
+        description=entry.get("example"),
+        params=entry.get("params"),
+        color=0xf3e6a5,
+    )
+    embed.set_thumbnail(
+        url="https://cdn.discordapp.com/icons/593486730187899041/35fca63aa75c42253248c864c92124eb.png")
+    methods = entry.get("methods")
+    if methods:
+        embed.add_field(name="methods :", value=" ", inline=False)
+        for m in methods:
+            embed.add_field(name=" ", value=m, inline=True)
+    embed.set_footer(
+        text=entry.get("github_url"))
 
 
 
