@@ -6,3 +6,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    environment:
+      - TOKEN=${TOKEN}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - GUILD_IDS=${GUILD_IDS}
