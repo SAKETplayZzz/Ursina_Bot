@@ -116,9 +116,9 @@ async def _chan(ctx):
 
 @slash.slash(name="doc", description="Refer you to the ursina documentation",guild_ids=guild_ids)
 async def _doc(ctx, label=""):
-    snippet = snippet.lower()
-    if snippet:
-        entry = cheatsheet.get_doc(snippet)
+    label = label.lower()
+    if label:
+        entry = cheatsheet.get_doc(label)
         if entry:
             await ctx.send(embed=get_cheatsheet_embed(entry))
         else:
