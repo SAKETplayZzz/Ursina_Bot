@@ -9,7 +9,7 @@ load_dotenv()
 
 
 
-guild_ids = [783370925538017330,882580557500911666]
+guild_ids = [int(var) for var in os.getenv('GUILD_IDS').split(' ')]
 
 client = discord.Client(intents=discord.Intents.all())
 slash = SlashCommand(client, sync_commands=True) # Declares slash commands through the client.
