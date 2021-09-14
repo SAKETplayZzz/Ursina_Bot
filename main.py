@@ -26,12 +26,12 @@ async def on_ready():
 
 @slash.slash(name="github", description="Show the link to the official ursina github",guild_ids=guild_ids)
 async def _github(ctx):
-    await ctx.send(f'``This is the github`` https://github.com/pokepetter/ursina')
+    await ctx.send('https://github.com/pokepetter/ursina')
 
 
 @slash.slash(name="api", description="Link you to the Api reference",guild_ids=guild_ids)
 async def _api(ctx):
-    await ctx.send(f'``This is the api refrence`` - https://www.ursinaengine.org/cheat_sheet.html')
+    await ctx.send('https://www.ursinaengine.org/cheat_sheet_dark.html')
 
 
 @slash.slash(name="ursina", description="Gives you info about what is Ursina",guild_ids=guild_ids)
@@ -41,14 +41,15 @@ async def _ursina(ctx):
 
 @slash.slash(name="msg", description="Show you how an help on how to post code",guild_ids=guild_ids)
 async def _msg(ctx):
-    await ctx.send(f'``This how you post your code``'
-                     'https://discord.com/channels/593486730187899041/593501819213316185/815179461711757321')
+    await ctx.send(
+        '``This how you post your code``'
+        'https://discord.com/channels/593486730187899041/593501819213316185/815179461711757321'
+        )
 
 
 @slash.slash(name="mcclone", description="How to make a minecraft clone",guild_ids=guild_ids)
 async def _mcclone(ctx):
-    await ctx.send(f'``Refer this`` - https://github.com/pokepetter/ursina/blob/master/samples/minecraft_clone.py')
-
+    await ctx.send('https://github.com/pokepetter/ursina/blob/master/samples/minecraft_clone.py')
 
 @slash.slash(name="shaders", description="Quick information about what are shaders and how use them",guild_ids=guild_ids)
 async def _shaders(ctx):
@@ -64,15 +65,15 @@ async def _inf_gen(ctx):
 
 @slash.slash(name="exit-button", description="How to remove exit button",guild_ids=guild_ids)
 async def _exit_b(ctx):
-    await ctx.send(f'``window.exit_button.enabled = False``')
+    await ctx.send('```py\nwindow.exit_button.enabled = False```')
 
 @slash.slash(name="fps-counter", description="How to hide the FPS counter ?",guild_ids=guild_ids)
 async def _fps_cnt(ctx):
-    await ctx.send(f'``window.fps_counter.enabled = False``')
+    await ctx.send('```py\nwindow.fps_counter.enabled = False```')
 
 @slash.slash(name="crosshair", description="How to hide the change the FirstPersonController crosshair ?",guild_ids=guild_ids)
 async def _xhair(ctx):
-    await ctx.send(f'``change player.cursor to a different entity``')
+    await ctx.send('change ``player.cursor`` to a different entity')
 
 @slash.slash(name="textures", description="What file type can I use as textures",guild_ids=guild_ids)
 async def _tex(ctx):
@@ -84,11 +85,11 @@ async def _mod(ctx):
 
 @slash.slash(name="collision", description="How can I add collisions to my game with ursina ?",guild_ids=guild_ids)
 async def _col(ctx):
-    await ctx.send(f'There you go : https://www.ursinaengine.org/collision.html')
+    await ctx.send('https://www.ursinaengine.org/collision.html')
 
 @slash.slash(name="build", description="How can I release my game with ursina ?",guild_ids=guild_ids)
 async def _release(ctx):
-    await ctx.send(f'``Follow this guide - https://www.ursinaengine.org/building.html``')
+    await ctx.send('https://www.ursinaengine.org/building.html``')
 
 @slash.slash(name="gif", description="How can I load a `.gif` file ?",guild_ids=guild_ids)
 async def _gif(ctx):
@@ -104,7 +105,7 @@ async def _gif(ctx):
 
 @slash.slash(name="channels", description="List all channels and their use cases",guild_ids=guild_ids)
 async def _chan(ctx):
-    await ctx.send(f"- Here's a list of channels with there uses \n \
+    await ctx.send(f"- Here's a list of channels with their uses \n \
         1.	#help  –  For help.\n \
         2.	#help_2 – For help, only use if #help is busy.\n \
         3.	#devlopment – For development of ursina engine.\n \
@@ -124,7 +125,7 @@ async def _doc(ctx, label=""):
         else:
             await ctx.send("Snippet not found")
     else:
-        await ctx.send(f'``This is the api refrence`` - https://www.ursinaengine.org/cheat_sheet.html')
+        await ctx.send(f'``Ursina API reference`` - https://www.ursinaengine.org/cheat_sheet_dark.html')
 
 
 def get_cheatsheet_embed(entry: dict) -> discord.Embed:
