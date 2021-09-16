@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  ursinabot:
+    image: ursinabot
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - TOKEN=${TOKEN}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - GUILD_IDS=${GUILD_IDS}
