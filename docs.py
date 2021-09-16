@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 CHEAT_SHEET_URL = "https://www.ursinaengine.org/cheat_sheet_dark.html"
 # Time before cached version will be updated (in seconds)
-MAX_DATA_AGE = 1800
+MAX_DATA_AGE = 172800
 DEBUG = True if os.getenv("LOG_LEVEL") == "debug" else False
 
 
